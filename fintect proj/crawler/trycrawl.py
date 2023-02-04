@@ -68,6 +68,7 @@ for i in in_stocks_ch:
         df = df.drop(columns=['Adj Close'])
 
         # print(df.Open)
+        print("Stock code : ", stock_list[i].cname)
         df.to_csv('./stk2/'+ stock_list[i].cname+'.txt',sep='\t')
     except:
         continue;
@@ -83,6 +84,8 @@ for i in in_stocks_en:
         df['Date'] = df.index
 
         # print(df.Open)
+        print("Stock code : ", i)
+
         df.to_csv('./stk2/'+ i+'.txt',sep='\t')
     except:
         continue;
@@ -97,8 +100,12 @@ df['Date'] = df.index
 
 df.to_csv('./stk2/TWII.txt',sep='\t')
 
+num = 1
 
 for i in all:
+    if num==10000:
+        break
+    num+=1
     df = web.get_data_yahoo([i+'.TW'],start, end)
     # print(df.Date)
     df = df.drop(columns=['Adj Close'])
@@ -109,6 +116,8 @@ for i in all:
         df['Date'] = df.index
 
         # print(df.Open)
+        print("Stock code : ", i)
+
         df.to_csv('./stk2/'+ i+'.txt',sep='\t')
     except:
         continue;
