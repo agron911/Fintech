@@ -6,7 +6,6 @@ from sklearn.linear_model import LinearRegression
 import statsmodels.api as sm
 from statsmodels.formula.api import ols
 import requests
-from fake_useragent import UserAgent
 import pandas as pd
 
 import pandas as pd
@@ -69,7 +68,7 @@ for i in in_stocks_ch:
 
         # print(df.Open)
         print("Stock code : ", stock_list[i].cname)
-        df.to_csv('./stk2/'+ stock_list[i].cname+'.txt',sep='\t')
+        df.to_csv('C:/Users/XPS-9365/Desktop/Fintech/fintect proj/crawler/stk2/'+ stock_list[i].cname+'.txt',sep='\t')
     except:
         continue;
 
@@ -86,7 +85,7 @@ for i in in_stocks_en:
         # print(df.Open)
         print("Stock code : ", i)
 
-        df.to_csv('./stk2/'+ i+'.txt',sep='\t')
+        df.to_csv('C:/Users/XPS-9365/Desktop/Fintech/fintect proj/crawler/stk2/'+ i+'.txt',sep='\t')
     except:
         continue;
 
@@ -98,7 +97,7 @@ df.index = df.index.str.split(",").str[0]
 
 df['Date'] = df.index
 
-df.to_csv('./stk2/TWII.txt',sep='\t')
+df.to_csv('C:/Users/XPS-9365/Desktop/Fintech/fintect proj/crawler/stk2//TWII.txt',sep='\t')
 
 num = 1
 
@@ -118,7 +117,7 @@ for i in all:
         # print(df.Open)
         print("Stock code : ", i)
 
-        df.to_csv('./stk2/'+ i+'.txt',sep='\t')
+        df.to_csv('C:/Users/XPS-9365/Desktop/Fintech/fintect proj/crawler/stk2/'+ i+'.txt',sep='\t')
     except:
         continue;
 
