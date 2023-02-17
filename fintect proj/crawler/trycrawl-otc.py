@@ -12,7 +12,7 @@ df = df.rename(columns={"Volume('000 shares)":"Volume"})
 df.sort_values(by='Date',inplace=True)
 
 df.set_index('Date',inplace=True)
-df.to_csv('./sk2/'+code+'.txt',sep='\t')
+df.to_csv('C:/Users/XPS-9365/Desktop/Fintech/fintect proj/crawler/stk2/'+code+'.txt',sep='\t')
 
 print(df)
 
