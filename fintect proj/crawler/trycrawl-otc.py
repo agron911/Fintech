@@ -8,11 +8,13 @@ df = pd.read_csv('C:/Users/XPS-9365/Downloads/'+ code +'.csv')
 
 df = df[['Date','Open','High','Low','Close',"Volume('000 shares)"]]
 df = df.rename(columns={"Volume('000 shares)":"Volume"})
+df['Date1']=df.Date
 
 df.sort_values(by='Date',inplace=True)
 
 df.set_index('Date',inplace=True)
-df.Date=df.index
+df = df.rename(columns={"Date1":"Date"})
+
 df.to_csv('C:/Users/XPS-9365/Desktop/Fintech/fintect proj/crawler/stk2/'+code+'.txt',sep='\t')
 
 print(df)
