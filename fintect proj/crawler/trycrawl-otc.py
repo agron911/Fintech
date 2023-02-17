@@ -1,34 +1,61 @@
 import pandas as pd
 import datetime
+from selenium import webdriver
+import time
+from selenium.webdriver.common.by import By
+import os
 
-print("輸入你有的上櫃股票代號 enter your otc stock code:")
-code = input()
+while True:
+    print("Enter your otc stock code:")
+    code = input()
 
-df = pd.read_csv('C:/Users/XPS-9365/Downloads/'+ code +'.csv')
+    options = webdriver.ChromeOptions()
+    options.add_argument('--ignore-certificate-errors')
+    options.add_argument("--test-type")
 
-df = df[['Date','Open','High','Low','Close',"Volume('000 shares)"]]
-df = df.rename(columns={"Volume('000 shares)":"Volume"})
-df['Date1']=df.Date
-
-df.sort_values(by='Date',inplace=True)
-
-df.set_index('Date',inplace=True)
-df = df.rename(columns={"Date1":"Date"})
-
-df.to_csv('C:/Users/XPS-9365/Desktop/Fintech/fintect proj/crawler/stk2/'+code+'.txt',sep='\t')
-
-print(df)
-
-# df.index = df.Date
-# df.Date = datetime.datetime.strptime(df.Date,"%Y/%m/%d, %r").date()
-# df.index = df.index.strftime("%Y/%m/%d , %r")
-
-# df.Date = pd.to_datetime(df.Date,format='%Y/%m/%d')
-
-# df.index = df.index.strftime("%Y/%m/%d , %r")
-
-# df.Date = df.Date.astype(str)
+    driver = webdriver.Chrome(chrome_options=options)
 
 
-# df.sort_values(['Date', 'Open', 'High', 'Low', 'Close', 'Volume'],by='Date')
-# print(df.sort_values(['Date', 'Open', 'High', 'Low', 'Close', 'Volume'],key='Date'))
+    driver.get('https://invest.cnyes.com/twstock/TWS/' + code + '/history#fixed')
+    time.sleep(3)
+
+    driver.execute_script("window.scrollTo(0, 800)") 
+    time.sleep(3)
+
+
+    myw = driver.find_element(By.XPATH,"""/html/body/div[1]/div[1]/div[2]/div[3]/section[2]/div[2]/div[1]/div/button""")
+    myw.click()
+
+    time.sleep(2)
+
+    myw = driver.find_element(By.XPATH,"""/html/body/div[1]/div[1]/div[2]/div[3]/section[2]/div[2]/div[1]/div/div[2]/div[1]/button[8]""")
+    myw.click()
+
+    time.sleep(2)
+    myw = driver.find_element(By.XPATH,"""/html/body/div[1]/div[1]/div[2]/div[3]/section[2]/div[2]/div[1]/div/div[2]/div[3]/button[2]""")
+    myw.click()
+
+    time.sleep(3)
+    myw = driver.find_element(By.XPATH,"""/html/body/div[1]/div[1]/div[2]/div[3]/section[2]/div[2]/div[1]/a/button""")
+    myw.click()
+
+    os.rename('C:/Users/XPS-9365/Downloads/'+ code +'_history.csv', code+'.csv')
+
+
+
+
+    df = pd.read_csv('C:/Users/XPS-9365/Downloads/'+ code +'.csv')
+
+    df = df[['Date','Open','High','Low','Close',"Volume('000 shares)"]]
+    df = df.rename(columns={"Volume('000 shares)":"Volume"})
+    df['Date1']=df.Date
+
+    df.sort_values(by='Date',inplace=True)
+
+    df.set_index('Date',inplace=True)
+    df = df.rename(columns={"Date1":"Date"})
+
+    df.to_csv('C:/Users/XPS-9365/Desktop/Fintech/fintect proj/crawler/stk2/'+code+'.txt',sep='\t')
+
+    print(df)
+
