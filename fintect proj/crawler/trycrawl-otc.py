@@ -20,18 +20,18 @@ while True:
     time.sleep(3)
 
     driver.execute_script("window.scrollTo(0, 1050)") 
-    time.sleep(3)
+    time.sleep(1)
 
 
     myw = driver.find_element(By.XPATH,"""/html/body/div[1]/div[1]/div[2]/div[3]/section[2]/div[2]/div[1]/div/button""")
     myw.click()
 
-    time.sleep(2)
+    time.sleep(1)
 
     myw = driver.find_element(By.XPATH,"""/html/body/div[1]/div[1]/div[2]/div[3]/section[2]/div[2]/div[1]/div/div[2]/div[1]/button[8]""")
     myw.click()
 
-    time.sleep(2)
+    time.sleep(3)
     myw = driver.find_element(By.XPATH,"""/html/body/div[1]/div[1]/div[2]/div[3]/section[2]/div[2]/div[1]/div/div[2]/div[3]/button[2]""")
     myw.click()
 
