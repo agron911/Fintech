@@ -1,7 +1,7 @@
 import pandas as pd
 import datetime
 
-print("輸入你有的上櫃股票代號:")
+print("輸入你有的上櫃股票代號 enter your otc stock code:")
 code = input()
 
 df = pd.read_csv('./'+ code +'.csv')
