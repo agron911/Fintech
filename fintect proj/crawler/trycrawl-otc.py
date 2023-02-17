@@ -4,7 +4,7 @@ import datetime
 print("輸入你有的上櫃股票代號 enter your otc stock code:")
 code = input()
 
-df = pd.read_csv('./sk2/'+ code +'.csv')
+df = pd.read_csv('C:/Users/XPS-9365/Downloads/'+ code +'.csv')
 
 df = df[['Date','Open','High','Low','Close',"Volume('000 shares)"]]
 df = df.rename(columns={"Volume('000 shares)":"Volume"})
@@ -12,7 +12,7 @@ df = df.rename(columns={"Volume('000 shares)":"Volume"})
 df.sort_values(by='Date',inplace=True)
 
 df.set_index('Date',inplace=True)
-df.to_csv('./'+code+'.txt',sep='\t')
+df.to_csv('./sk2/'+code+'.txt',sep='\t')
 
 print(df)
 
