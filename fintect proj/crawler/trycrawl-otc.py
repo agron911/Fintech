@@ -4,10 +4,10 @@ from selenium import webdriver
 import time
 from selenium.webdriver.common.by import By
 import os
-
-while True:
-    print("Enter your otc stock code:")
-    code = input()
+# print("Enter your otc stock code:")
+codes = ['5490','6160','6152','2025','2516']
+for code in codes:
+    
 
     options = webdriver.ChromeOptions()
     options.add_argument('--ignore-certificate-errors')
