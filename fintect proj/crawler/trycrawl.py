@@ -121,7 +121,7 @@ df.to_csv('./stk2/TSLA.txt',sep='\t')
 num = 1
 
 for i in all:
-    if num==1000:
+    if num==950:
         break
     num+=1
     df = web.get_data_yahoo([i+'.TW'],start, end)
