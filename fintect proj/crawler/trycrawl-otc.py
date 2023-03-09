@@ -49,8 +49,8 @@ for code in codes:
 
     time.sleep(2)
 
-    # df = pd.read_csv('C:/Users/XPS-9365/Downloads/'+ code +'_history.csv')
-    df = pd.read_csv( 'C:/Users/user/Downloads/'+ code+'_history.csv')
+    df = pd.read_csv('C:/Users/XPS-9365/Downloads/'+ code +'_history.csv')
+    # df = pd.read_csv( 'C:/Users/user/Downloads/'+ code+'_history.csv')
 
     df = df[['Date','Open','High','Low','Close',"Volume('000 shares)"]]
     df = df.rename(columns={"Volume('000 shares)":"Volume"})
@@ -61,8 +61,8 @@ for code in codes:
     df.set_index('Date',inplace=True)
     df = df.rename(columns={"Date1":"Date"})
 
-    # df.to_csv('C:/Users/XPS-9365/Desktop/Fintech/fintect proj/crawler/stk2/'+code+'.txt',sep='\t')
-    df.to_csv('C:/Users/user/OneDrive/Fintech/fintect proj/crawler/stk2/'+code+'.txt',sep='\t')
+    df.to_csv('C:/Users/XPS-9365/Desktop/Fintech/fintect proj/crawler/stk2/'+code+'.txt',sep='\t')
+    # df.to_csv('C:/Users/user/OneDrive/Fintech/fintect proj/crawler/stk2/'+code+'.txt',sep='\t')
 
     print(df)
 
