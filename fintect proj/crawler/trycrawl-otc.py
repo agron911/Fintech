@@ -5,7 +5,7 @@ import time
 from selenium.webdriver.common.by import By
 import os
 print("Enter your otc stock code:")
-codes = ['5490','6160','6152','2025','2516','4903','8255']
+codes = ['9945','6152','5490','6160','6152','2025','2516','4903','8255']
 # codes = ['6160']
 # code = input()
 for code in codes:
