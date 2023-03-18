@@ -4,8 +4,10 @@ from selenium import webdriver
 import time
 from selenium.webdriver.common.by import By
 import os
+from pathlib import Path
+import random
 print("Enter your otc stock code:")
-codes = ['9945','6152','5490','6160','6152','2025','2516','4903','8255']
+codes = ['6188','6143','9945','6152','5490','6160','6152','2025','2516','4903','8255']
 # codes = ['6160']
 # code = input()
 for code in codes:
@@ -19,7 +21,7 @@ for code in codes:
 
 
     driver.get('https://invest.cnyes.com/twstock/TWS/' + code + '/history#fixed')
-    time.sleep(2)
+    time.sleep(random.random())
 
     driver.execute_script("window.scrollTo(0, 1050)") 
     # time.sleep(1)
@@ -33,11 +35,11 @@ for code in codes:
     myw = driver.find_element(By.XPATH,"""/html/body/div[1]/div[1]/div[2]/div[3]/section[2]/div[2]/div[1]/div/div[2]/div[1]/button[8]""")
     myw.click()
 
-    time.sleep(1)
+    time.sleep(random.random())
     myw = driver.find_element(By.XPATH,"""/html/body/div[1]/div[1]/div[2]/div[3]/section[2]/div[2]/div[1]/div/div[2]/div[3]/button[2]""")
     myw.click()
 
-    time.sleep(3)
+    time.sleep(1)
     myw = driver.find_element(By.XPATH,"""/html/body/div[1]/div[1]/div[2]/div[3]/section[2]/div[2]/div[1]/a/button""")
     myw.click()
 
@@ -47,7 +49,7 @@ for code in codes:
 
 
 
-    time.sleep(2)
+    time.sleep(random.random())
 
     df = pd.read_csv('C:/Users/XPS-9365/Downloads/'+ code +'_history.csv')
     # df = pd.read_csv( 'C:/Users/user/Downloads/'+ code+'_history.csv')
@@ -63,6 +65,10 @@ for code in codes:
 
     df.to_csv('C:/Users/XPS-9365/Desktop/Fintech/fintect proj/crawler/stk2/'+code+'.txt',sep='\t')
     # df.to_csv('C:/Users/user/OneDrive/Fintech/fintect proj/crawler/stk2/'+code+'.txt',sep='\t')
+
+    file = Path('C:/Users/XPS-9365/Downloads/'+ code +'_history.csv')
+    # file = Path('C:\\Users\\user\\Downloads\\'+ code+'_history.csv')
+    os.remove(file)
 
     print(df)
 

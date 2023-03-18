@@ -108,6 +108,7 @@ df.index = df.index.str.split(",").str[0]
 df['Date'] = df.index
 
 df.to_csv('./stk2/CCL.txt',sep='\t')
+
 df = web.get_data_yahoo(['MRO'],start, end)
 df = df.drop(columns=['Adj Close'])
 # df.index.strftime("%Y/%M/%D")
@@ -115,7 +116,8 @@ df.index = df.index.strftime("%Y/%m/%d , %r")
 df.index = df.index.str.split(",").str[0]
 df['Date'] = df.index
 
-df.to_csv('./stk2/CCL.txt',sep='\t')
+df.to_csv('./stk2/MRO.txt',sep='\t')
+
 df = web.get_data_yahoo(['TSLA'],start, end)
 df = df.drop(columns=['Adj Close'])
 # df.index.strftime("%Y/%M/%D")
