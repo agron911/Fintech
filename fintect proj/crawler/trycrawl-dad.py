@@ -54,6 +54,32 @@ in_stocks_ch = ['4919','1314', '2485', '2353', '6216', '6168', '2399', '3062', '
 in_stocks_en = ['2330', '2511','1710', '6116', '2883', '1909', '2603', '3034','6152']
 
 
+
+df = web.get_data_yahoo(['CCL'],start, end)
+df = df.drop(columns=['Adj Close'])
+# df.index.strftime("%Y/%M/%D")
+df.index = df.index.strftime("%Y/%m/%d , %r")
+df.index = df.index.str.split(",").str[0]
+df['Date'] = df.index
+
+df.to_csv('./stk2/CCL.txt',sep='\t')
+
+df = web.get_data_yahoo(['MRO'],start, end)
+df = df.drop(columns=['Adj Close'])
+# df.index.strftime("%Y/%M/%D")
+df.index = df.index.strftime("%Y/%m/%d , %r")
+df.index = df.index.str.split(",").str[0]
+df['Date'] = df.index
+
+df = web.get_data_yahoo(['NVTS'],start, end)
+df = df.drop(columns=['Adj Close'])
+# df.index.strftime("%Y/%M/%D")
+df.index = df.index.strftime("%Y/%m/%d , %r")
+df.index = df.index.str.split(",").str[0]
+df['Date'] = df.index
+
+
+
 for i in in_stocks_ch:
     df = web.get_data_yahoo([i+'.TW'],start, end)
     # print(df.Date)
