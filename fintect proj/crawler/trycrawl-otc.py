@@ -35,11 +35,11 @@ for code in codes:
     myw = driver.find_element(By.XPATH,"""/html/body/div[1]/div[1]/div[2]/div[3]/section[2]/div[2]/div[1]/div/div[2]/div[1]/button[8]""")
     myw.click()
 
-    time.sleep(random.random())
+    time.sleep(1)
     myw = driver.find_element(By.XPATH,"""/html/body/div[1]/div[1]/div[2]/div[3]/section[2]/div[2]/div[1]/div/div[2]/div[3]/button[2]""")
     myw.click()
 
-    time.sleep(1)
+    time.sleep(2)
     myw = driver.find_element(By.XPATH,"""/html/body/div[1]/div[1]/div[2]/div[3]/section[2]/div[2]/div[1]/a/button""")
     myw.click()
 
@@ -49,7 +49,7 @@ for code in codes:
 
 
 
-    time.sleep(random.random())
+    time.sleep(1)
 
     df = pd.read_csv('C:/Users/XPS-9365/Downloads/'+ code +'_history.csv')
     # df = pd.read_csv( 'C:/Users/user/Downloads/'+ code+'_history.csv')
@@ -68,7 +68,7 @@ for code in codes:
 
     file = Path('C:\\Users\\XPS-9365\\Downloads\\'+ code +'_history.csv')
     # file = Path('C:\\Users\\user\\Downloads\\'+ code+'_history.csv')
-    os.remove(file)
+    # os.remove(file)
 
     print(df)
 
