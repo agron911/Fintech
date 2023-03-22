@@ -66,7 +66,7 @@ for code in codes:
     df.to_csv('C:/Users/XPS-9365/Desktop/Fintech/fintect proj/crawler/stk2/'+code+'.txt',sep='\t')
     # df.to_csv('C:/Users/user/OneDrive/Fintech/fintect proj/crawler/stk2/'+code+'.txt',sep='\t')
 
-    file = Path('C:/Users/XPS-9365/Downloads/'+ code +'_history.csv')
+    file = Path('C:\\Users\\XPS-9365\\Downloads\\'+ code +'_history.csv')
     # file = Path('C:\\Users\\user\\Downloads\\'+ code+'_history.csv')
     os.remove(file)
 
