@@ -7,40 +7,55 @@ import os
 from pathlib import Path
 import random
 print("Enter your otc stock code:")
-codes = ['6188','6143','9945','6152','5490','6160','6152','2025','2516','4903','8255']
+codes = ['6152','5490','6160','2025','2516','4903','8255','6188','6143','9945']
 # codes = ['6160']
+
+
+for code in codes:
+    
+    try:
+
+        filePath ='C:\\Users\\XPS-9365\\Downloads\\'+ code +'_history.csv'
+        os.chmod(filePath, 0o777)
+        file = Path(filePath)
+        # file = Path('C:\\Users\\user\\Downloads\\'+ code+'_history.csv')
+        os.remove(file)
+    except Exception as e:
+            print(e)
 # code = input()
 for code in codes:
     
 
+
     options = webdriver.ChromeOptions()
     options.add_argument('--ignore-certificate-errors')
     options.add_argument("--test-type")
+    options.add_argument("--start-maximized")
+
 
     driver = webdriver.Chrome(chrome_options=options)
 
-
-    driver.get('https://invest.cnyes.com/twstock/TWS/' + code + '/history#fixed')
+    driver.get('https://www.cnyes.com/twstock/' + code + '/summary/technical')
     time.sleep(random.random())
 
-    driver.execute_script("window.scrollTo(0, 1050)") 
-    # time.sleep(1)
+    driver.execute_script("window.scrollTo(0, 1920)") 
+    time.sleep(2)
 
 
-    myw = driver.find_element(By.XPATH,"""/html/body/div[1]/div[1]/div[2]/div[3]/section[2]/div[2]/div[1]/div/button""")
-    myw.click()
-
-    # time.sleep(1)
-
-    myw = driver.find_element(By.XPATH,"""/html/body/div[1]/div[1]/div[2]/div[3]/section[2]/div[2]/div[1]/div/div[2]/div[1]/button[8]""")
+    myw = driver.find_element(By.XPATH,"""//*[@id="tw-stock-tabs"]/section/section[2]/div[3]/div/div/section/div[1]/div/button""")
     myw.click()
 
     time.sleep(1)
-    myw = driver.find_element(By.XPATH,"""/html/body/div[1]/div[1]/div[2]/div[3]/section[2]/div[2]/div[1]/div/div[2]/div[3]/button[2]""")
+
+    myw = driver.find_element(By.XPATH,"""//*[@id="tw-stock-tabs"]/section/section[2]/div[3]/div/div/section/div[1]/div/div[2]/div[1]/button[7]""")
+    myw.click()
+
+    time.sleep(1)
+    myw = driver.find_element(By.XPATH,"""//*[@id="tw-stock-tabs"]/section/section[2]/div[3]/div/div/section/div[1]/div/div[2]/div[3]/button[2]""")
     myw.click()
 
     time.sleep(2)
-    myw = driver.find_element(By.XPATH,"""/html/body/div[1]/div[1]/div[2]/div[3]/section[2]/div[2]/div[1]/a/button""")
+    myw = driver.find_element(By.XPATH,"""//*[@id="tw-stock-tabs"]/section/section[2]/div[3]/div/div/section/div[1]/a/button""")
     myw.click()
 
     # os.rename('C:/Users/XPS-9365/Downloads/'+ code +'_history.csv', code+'.csv')
@@ -49,13 +64,15 @@ for code in codes:
 
 
 
-    time.sleep(1)
+    time.sleep(2)
 
     df = pd.read_csv('C:/Users/XPS-9365/Downloads/'+ code +'_history.csv')
     # df = pd.read_csv( 'C:/Users/user/Downloads/'+ code+'_history.csv')
 
-    df = df[['Date','Open','High','Low','Close',"Volume('000 shares)"]]
-    df = df.rename(columns={"Volume('000 shares)":"Volume"})
+    df = df[['日期','開盤','最高','最低','收盤',"成交張數"]]
+    df.rename(columns={"日期":"Date","開盤":"Open","最高":"High","最低":"Low","收盤":"Close","成交張數":"Volume"},inplace=True)
+    #df = df[['Date','Open','High','Low','Close',"Volume('000 shares)"]]
+    #df = df.rename(columns={"Volume('000 shares)":"Volume"})
     df['Date1']=df.Date
 
     df.sort_values(by='Date',inplace=True)
@@ -65,10 +82,8 @@ for code in codes:
 
     df.to_csv('C:/Users/XPS-9365/Desktop/Fintech/fintect proj/crawler/stk2/'+code+'.txt',sep='\t')
     # df.to_csv('C:/Users/user/OneDrive/Fintech/fintect proj/crawler/stk2/'+code+'.txt',sep='\t')
-
-    file = Path('C:\\Users\\XPS-9365\\Downloads\\'+ code +'_history.csv')
-    # file = Path('C:\\Users\\user\\Downloads\\'+ code+'_history.csv')
-    # os.remove(file)
+    
+    
 
     print(df)
 
