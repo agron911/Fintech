@@ -16,9 +16,9 @@ for code in codes:
     try:
 
         filePath ='C:\\Users\\XPS-9365\\Downloads\\'+ code +'_history.csv'
+        # filePath = Path('C:\\Users\\user\\Downloads\\'+ code+'_history.csv')
         os.chmod(filePath, 0o777)
         file = Path(filePath)
-        # file = Path('C:\\Users\\user\\Downloads\\'+ code+'_history.csv')
         os.remove(file)
     except Exception as e:
             print(e)
@@ -35,22 +35,22 @@ for code in codes:
 
     driver = webdriver.Chrome(chrome_options=options)
 
-    driver.get('https://www.cnyes.com/twstock/' + code + '/summary/technical')
+    driver.get('https://www.cnyes.com/twstock/' + code + '/charts/technical-history')
     time.sleep(random.random())
 
-    driver.execute_script("window.scrollTo(0, 1920)") 
+    driver.execute_script("window.scrollTo(0, 1800)") 
     time.sleep(2)
 
 
     myw = driver.find_element(By.XPATH,"""//*[@id="tw-stock-tabs"]/section/section[2]/div[3]/div/div/section/div[1]/div/button""")
     myw.click()
 
-    time.sleep(1)
+    time.sleep(random.random())
 
-    myw = driver.find_element(By.XPATH,"""//*[@id="tw-stock-tabs"]/section/section[2]/div[3]/div/div/section/div[1]/div/div[2]/div[1]/button[7]""")
+    myw = driver.find_element(By.XPATH,"""//*[@id="tw-stock-tabs"]/section/section[2]/div[3]/div/div/section/div[1]/div/div[2]/div[1]/button[8]""")
     myw.click()
 
-    time.sleep(1)
+    time.sleep(random.random())
     myw = driver.find_element(By.XPATH,"""//*[@id="tw-stock-tabs"]/section/section[2]/div[3]/div/div/section/div[1]/div/div[2]/div[3]/button[2]""")
     myw.click()
 
@@ -58,9 +58,7 @@ for code in codes:
     myw = driver.find_element(By.XPATH,"""//*[@id="tw-stock-tabs"]/section/section[2]/div[3]/div/div/section/div[1]/a/button""")
     myw.click()
 
-    # os.rename('C:/Users/XPS-9365/Downloads/'+ code +'_history.csv', code+'.csv')
     print(os.listdir)
-    # os.rename('C:/Users/user/Downloads/'+ code +'_history.csv', 'C:/Users/user/Downloads/'+code+'.csv')
 
 
 
