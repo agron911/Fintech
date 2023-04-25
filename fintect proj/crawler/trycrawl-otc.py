@@ -38,7 +38,7 @@ for code in codes:
     driver.get('https://www.cnyes.com/twstock/' + code + '/charts/technical-history')
     time.sleep(random.random())
 
-    driver.execute_script("window.scrollTo(0, 1860)") 
+    driver.execute_script("window.scrollTo(0, 1910)") 
     time.sleep(2)
 
 
