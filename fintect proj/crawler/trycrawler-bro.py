@@ -71,6 +71,17 @@ df['Date'] = df.index
 
 df.to_csv('./stk2/GOLD.txt',sep='\t')
 
+
+for i in International_stock:
+    df = web.get_data_yahoo([i],start, end)
+    df = df.drop(columns=['Adj Close'])
+    # df.index.strftime("%Y/%M/%D")
+    df.index = df.index.strftime("%Y/%m/%d , %r")
+    df.index = df.index.str.split(",").str[0]
+    df['Date'] = df.index
+    df.to_csv('./stk2/'+i+'.txt',sep='\t')
+
+
 for i in in_stocks_ch:
     df = web.get_data_yahoo([i+'.TW'],start, end)
     # print(df.Date)
@@ -115,15 +126,6 @@ df['Date'] = df.index
 
 df.to_csv('./stk2/TWII.txt',sep='\t')
 
-
-for i in International_stock:
-    df = web.get_data_yahoo([i],start, end)
-    df = df.drop(columns=['Adj Close'])
-    # df.index.strftime("%Y/%M/%D")
-    df.index = df.index.strftime("%Y/%m/%d , %r")
-    df.index = df.index.str.split(",").str[0]
-    df['Date'] = df.index
-    df.to_csv('./stk2/'+i+'.txt',sep='\t')
 
 # df = web.get_data_yahoo(['CCL'],start, end)
 # df = df.drop(columns=['Adj Close'])
