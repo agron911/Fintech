@@ -31,7 +31,7 @@ yf.pdr_override()
 #     print("Error raised in web crawing.")
 #     print('\n ',e)
 #     exit()
-
+International_stock = ['CCL','MRO','TSLA','AMD']
 
 stock_list = pd.read_excel('./list.xls')
 stock_list = stock_list.iloc[:,:1]
@@ -48,12 +48,22 @@ print(stock_list["1314"].cname)
 start = dt.datetime(2005, 1,1)
 end = dt.datetime(2023,12,24)
 
+
+
+
 in_stocks_ch = ['4919','1314', '2485', '2353', '6216', '6168', '2399', '3062', '2516', '3443', 
 '5490', '2324', '3356', '2337', '2002', '1471', '2484', '8104', '6160', '2025', '2374']
 
 in_stocks_en = ['2330', '2511','1710', '6116', '2883', '1909', '2603', '3034','6152']
 
-
+for i in International_stock:
+    df = web.get_data_yahoo([i],start, end)
+    df = df.drop(columns=['Adj Close'])
+    # df.index.strftime("%Y/%M/%D")
+    df.index = df.index.strftime("%Y/%m/%d , %r")
+    df.index = df.index.str.split(",").str[0]
+    df['Date'] = df.index
+    df.to_csv('./stk2/'+i+'.txt',sep='\t')
 
 df = web.get_data_yahoo(['CCL'],start, end)
 df = df.drop(columns=['Adj Close'])
