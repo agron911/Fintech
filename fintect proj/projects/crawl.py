@@ -30,12 +30,32 @@ long_tail_stk = {}
 
 def crawl_all_ch(self):
 
-    print(self.frame.input6.GetValue())
+    International_stock = pd.read_csv("international.txt")
+    for i in International_stock['code']:
+        df = web.get_data_yahoo([i],start, end)
+        df = df.drop(columns=['Adj Close'])
+        # df.index.strftime("%Y/%M/%D")
+        df.index = df.index.strftime("%Y/%m/%d , %r")
+        df.index = df.index.str.split(",").str[0]
+        df['Date'] = df.index
+        df.to_csv('./stk2/'+i+'.txt',sep='\t')
+
+
+        print("Crawl:", i)
 
     stock_list = pd.read_excel(os.getcwd()+'/adjustments/list.xls')
     stock_list = stock_list.iloc[:,:1]
     stock_list['code'] = stock_list.iloc[:,0].str.split('　').str[0]
     all = stock_list.code
+
+    df = web.get_data_yahoo(['^TWII'],start, end)
+    df = df.drop(columns=['Adj Close'])
+    # df.index.strftime("%Y/%M/%D")
+    df.index = df.index.strftime("%Y/%m/%d , %r")
+    df.index = df.index.str.split(",").str[0]
+    df['Date'] = df.index
+
+    df.to_csv('./stk2/TWII.txt',sep='\t')
 
     num=1
     print("ALL", all)
@@ -69,9 +89,10 @@ def crawl_all_ch(self):
             continue;
 
 def crawl_all_otc(self):
-    codes = ['5009','1108','3293','6152','5490','6160','2025','2516','4903','8255','6188','6143','9945']
+    codes = pd.read_csv("otc.txt")
+    # codes = ['5009','1108','3293','6152','5490','6160','2025','2516','4903','8255','6188','6143','9945']
 
-    for code in codes:
+    for code in codes['code']:
         
         try:
             s = os.getcwd()
@@ -88,7 +109,7 @@ def crawl_all_otc(self):
     for code in codes:
         
 
-
+            
         options = webdriver.ChromeOptions()
         options.add_experimental_option('excludeSwitches', ['enable-logging'])
 
