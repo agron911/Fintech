@@ -24,7 +24,7 @@ from stats_func import *
 
 
 start = dt.datetime(2000, 1,1)
-end = dt.datetime(2023,12,24)
+end = dt.datetime(2024,12,24)
 
 long_tail_stk = {}
 
