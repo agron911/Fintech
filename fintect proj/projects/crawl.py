@@ -20,6 +20,8 @@ from pathlib import Path
 import random
 import time
 import wx
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 yf.pdr_override()
@@ -135,8 +137,14 @@ def crawl_all_ch_deprecated(self):
         # df.index.strftime("%Y/%M/%D")
         df.index = df.index.strftime("%Y/%m/%d , %r")
         df.index = df.index.str.split(",").str[0]
+<<<<<<< HEAD
         df["Date"] = df.index
         df.to_csv("./stk2/" + i + ".txt", sep="\t")
+=======
+        df['Date'] = df.index
+        df.to_csv('./stk2/'+ str(i)+'.txt',sep='\t')
+
+>>>>>>> 2db89597e406e4bf0b394558f9500d6420876541
 
         print("Crawl:", i)
 
@@ -222,8 +230,13 @@ def crawl_all_otc_deprecated(self):
     codes = pd.read_csv("otc.txt")
     # codes = ['5009','1108','3293','6152','5490','6160','2025','2516','4903','8255','6188','6143','9945']
 
+<<<<<<< HEAD
     for code in codes["code"]:
 
+=======
+    for code in codes['code']:
+        code = str(code)
+>>>>>>> 2db89597e406e4bf0b394558f9500d6420876541
         try:
             s = os.getcwd()
             user_path = (
@@ -236,11 +249,16 @@ def crawl_all_otc_deprecated(self):
             )
             user_path_download = user_path + "Downloads\\"
             # filePath ='C:\\Users\\XPS-9365\\Downloads\\'+ code +'_history.csv'
+<<<<<<< HEAD
             filePath = Path(user_path_download + str(code) + "_history.csv")
+=======
+            filePath = Path(user_path_download + code +'_history.csv')
+>>>>>>> 2db89597e406e4bf0b394558f9500d6420876541
             os.chmod(filePath, 0o777)
             file = Path(filePath)
             os.remove(file)
         except Exception as e:
+<<<<<<< HEAD
             print(e)
     # code = input()
     for code in codes.code:
@@ -265,8 +283,49 @@ def crawl_all_otc_deprecated(self):
         driver.get(
             "https://www.cnyes.com/twstock/" + str(code) + "/charts/technical-history"
         )
+=======
+                print(e)
+    for code in codes['code']:
+        code = str(code)
+        headers = {
+            'user-agent' : UserAgent().random
+        }
+            
+        options = webdriver.ChromeOptions()
+        options.add_experimental_option('excludeSwitches', ['enable-logging'])
+        options.add_argument(f'--user-agent={headers["user-agent"]}')
+        options.add_argument('--ignore-certificate-errors')
+        options.add_argument("--test-type")
+        options.add_argument("--start-maximized")
+
+        service = Service(ChromeDriverManager().install())
+        driver = webdriver.Chrome(options=options, service=service)
+        driver.get('https://www.cnyes.com/twstock/' + code + '/charts/technical-history')
+ 
+
         time.sleep(random.random())
 
+        driver.execute_script("window.scrollTo(0, 1850)") 
+        print("scroll down 1950")
+        
+
+        scrollto = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.CLASS_NAME, "technical-container"))
+        )
+
+        driver.execute_script("arguments[0].scrollTop = arguments[0].scollHeight;", scrollto)
+>>>>>>> 2db89597e406e4bf0b394558f9500d6420876541
+        time.sleep(random.random())
+        # offset = 100
+        # driver.execute_script(f"window.scrollBy(0, {offset})")
+        print("scroll down below the offset")
+        time.sleep(random.random())
+
+        # click_date = driver.find_element(By.XPATH,"""//*[@id="tw-stock-tabs"]/section/section[2]/div[3]/div/div/section/div[1]/div/button""")
+        # click_date.click()
+        # time.sleep(2)
+
+<<<<<<< HEAD
         driver.execute_script("window.scrollTo(0, 1910)")
         time.sleep(5)
 
@@ -274,9 +333,16 @@ def crawl_all_otc_deprecated(self):
             By.XPATH,
             """//*[@id="tw-stock-tabs"]/section/section[2]/div[3]/div/div/section/div[1]/div/button""",
         )
-        click_date.click()
-        time.sleep(2)
+=======
+        click_date_xpath = """//*[@id="tw-stock-tabs"]/section/section[2]/div[3]/div/div/section/div[1]/div/button"""
+        click_date = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH, click_date_xpath))
+        )
 
+>>>>>>> 2db89597e406e4bf0b394558f9500d6420876541
+        click_date.click()
+
+<<<<<<< HEAD
         time_value = WebDriverWait(driver, 20).until(
             EC.visibility_of_element_located(
                 (
@@ -286,6 +352,15 @@ def crawl_all_otc_deprecated(self):
             )
         )
         print("MINMIN before setting:", time_value)
+=======
+        # time_value = driver.find_element(By.XPATH,"""//*[@id="tw-stock-tabs"]/section/section[2]/div[3]/div/div/section/div[1]/div/div[2]/div[2]/div[1]/input""")
+        time_value_xpath = """//*[@id="tw-stock-tabs"]/section/section[2]/div[3]/div/div/section/div[1]/div/div[2]/div[2]/div[1]/input"""
+        time_value = WebDriverWait(driver, 10).until(
+            EC.visibility_of_element_located((By.XPATH, time_value_xpath))
+        )
+                
+        print("MINMIN:", time_value.get_attribute("min"))
+>>>>>>> 2db89597e406e4bf0b394558f9500d6420876541
         mindate = "2000-01-01"
         driver.execute_script(
             "arguments[0].setAttribute('min', arguments[1])", time_value, mindate
