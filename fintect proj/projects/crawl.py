@@ -96,7 +96,7 @@ def crawl_all_ch():
         else:
             print(f"Error fetching data for {code}")
             
-    df = web.get_data_yahoo(["^TWII"], listed_code, start, end)
+    df = fetch_stock_data(["^TWII"], listed_code, start, end)
     if df is not None:
         save_stock_data(df, "TWII")
 
@@ -365,3 +365,4 @@ def crawl_all_otc_deprecated(self):
 
 delete_files()
 crawl_all_ch()
+crawl_otc_yf()
